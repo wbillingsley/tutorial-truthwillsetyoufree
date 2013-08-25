@@ -1,0 +1,55 @@
+  apply plugin: 'java'
+  apply plugin: 'eclipse'
+
+  sourceCompatibility = 1.6
+  targetCompatibility = 1.6
+  
+  group = 'com.wbillingsley.tutorials'
+  artifact = 'arrival-class'
+  version = '0.1'
+  
+
+  repositories {
+    maven {
+      url 'http://deco2800.uqcloud.net/artifactory/everything'
+    }
+    ivy {
+      url 'http://deco2800.uqcloud.net/artifactory/everything'
+    }
+    maven {
+      url 'https://bitbucket.org/wbillingsley/mavenrepo/raw/master/snapshots/'
+    }
+    maven {
+      url 'https://repository.jboss.org/nexus/content/repositories/releases'
+    }
+  }
+
+  dependencies {
+    testCompile group: "junit", name: "junit", version: "4.11"
+    testCompile group: "org.mockito", name: "mockito-all", version: "1.9.5"
+    
+  }
+
+  jar {
+    manifest.attributes provider: 'gradle'
+  }
+
+  apply plugin: 'maven'
+
+  task javadocJar(type: Jar, dependsOn:javadoc) {
+     classifier = 'javadoc'
+     from javadoc.destinationDir
+  }
+ 
+  // add javadoc/source jar tasks as artifacts
+  artifacts {
+     archives javadocJar
+  }
+
+  uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: "file:///Users/wbillingsley/tmp/myRepo/")
+        }
+    }
+  }
