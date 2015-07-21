@@ -15,9 +15,6 @@ public class Notepad {
 	
 	/**
 	 * Adds a person into the notebook. If the person was already in there, check they still claim to have the same number
-	 * @param number
-	 * @param p
-	 * @return
 	 */
 	public void addPerson(int number, Person p) {
 		forwardMap.put(number, p);

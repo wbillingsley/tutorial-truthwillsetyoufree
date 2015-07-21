@@ -29,7 +29,6 @@ public class Person {
 	
 	/**
 	 * Welcome to the village.
-	 * @param village
 	 */
 	public void enterVillage() {
 		allocateNumber();
@@ -38,7 +37,6 @@ public class Person {
 	
 	/**
 	 * Sorry to see you go.
-	 * @param village
 	 */
 	public void leaveVillage() {
 		Village.INSTANCE.leave(this);
@@ -46,7 +44,6 @@ public class Person {
 	
 	/**
 	 * Receive important news about your family...
-	 * @param message
 	 */
 	public void receiveMessage(String message) {
 		System.out.println("Message received!");
@@ -54,8 +51,6 @@ public class Person {
 	
 	/**
 	 * Finds another villager
-	 * @param number
-	 * @return
 	 */
 	public Person find(int number) {
 		for (Person p : Village.INSTANCE.getOccupants()) {			
@@ -85,8 +80,6 @@ public class Person {
 	
 	/**
 	 * Note down what number someone said they had
-	 * @param n
-	 * @param p
 	 */
 	protected void notePerson(int n, Person p) {
 		notepad.addPerson(n, p);
@@ -94,7 +87,6 @@ public class Person {
 	
 	/**
 	 * Give the numbers you've collected to another villager
-	 * @param other
 	 */
 	public void shareNotepad(Person other) {
 		other.addToNotepad(notepad);
@@ -102,7 +94,6 @@ public class Person {
 	
 	/**
 	 * Add numbers from another notepad into your notepad
-	 * @param other
 	 */
 	public void addToNotepad(Notepad other) {
 		notepad.addAll(other);

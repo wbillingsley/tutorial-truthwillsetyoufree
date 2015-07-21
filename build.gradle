@@ -1,26 +1,15 @@
   apply plugin: 'java'
   apply plugin: 'eclipse'
 
-  sourceCompatibility = 1.6
-  targetCompatibility = 1.6
+  sourceCompatibility = 1.8
+  targetCompatibility = 1.8
   
   group = 'com.wbillingsley.tutorials'
   version = '0.1'
   
 
   repositories {
-    maven {
-      url 'http://deco2800.uqcloud.net/artifactory/everything'
-    }
-    ivy {
-      url 'http://deco2800.uqcloud.net/artifactory/everything'
-    }
-    maven {
-      url 'https://bitbucket.org/wbillingsley/mavenrepo/raw/master/snapshots/'
-    }
-    maven {
-      url 'https://repository.jboss.org/nexus/content/repositories/releases'
-    }
+    mavenCentral()
   }
 
   dependencies {
