@@ -9,6 +9,9 @@
   
 
   repositories {
+    maven {
+      url "https://hopper.une.edu.au:8081/artifactory/libs-release"
+    }
     mavenCentral()
   }
 
