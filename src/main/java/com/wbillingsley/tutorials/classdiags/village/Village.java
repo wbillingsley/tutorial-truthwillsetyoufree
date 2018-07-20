@@ -3,6 +3,7 @@ package com.wbillingsley.tutorials.classdiags.village;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.wbillingsley.tutorials.classdiags.NumberOne;
 import com.wbillingsley.tutorials.classdiags.Person;
 
 /**
@@ -38,7 +39,16 @@ public enum Village {
 	public void leave(Person p) {
 		throw new UnsupportedOperationException("Be seeing you.");
 	}
-	
+
+	public void throwOut(Person orderedBy, Person toThrow) {
+		if (orderedBy instanceof NumberOne) {
+			occupants.remove(toThrow);
+		} else {
+			throw new UnsupportedOperationException("Only NumberOne can throw out villagers");
+		}
+	}
+
+
 	/**
 	 * Gets the set of occupants
 	 */

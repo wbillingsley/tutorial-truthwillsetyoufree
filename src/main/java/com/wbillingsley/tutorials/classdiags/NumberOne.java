@@ -86,9 +86,7 @@ public class NumberOne extends Person {
 	 * When Number One needs to get someone out of the Village pronto, he knows how to smuggle them out.
 	 */
 	private void getHimOutOfHere(Person p) {
-		// At least I know how to get rid of them.
-		Set<Person> occupants = Village.INSTANCE.getOccupants();
-		occupants.remove(p);
+		Village.INSTANCE.throwOut(this, p);
 		System.out.println("You have been kicked out of the village for discovering my identity!");
 	}
 	
