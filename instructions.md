@@ -21,8 +21,6 @@ Sketch out a class diagrm of the code.  Show how `Village`, `Person`, `NumberSix
 
 Include methods, visibility, annotations, and parameter types (but don't include getters and setters).
 
-If you want a very quick solution to this, install ObjectAid into Eclipse, and create a new class diagram.  Drag the classes in, and it will sketch them out for you.
-
 
 ## The story
 
@@ -37,6 +35,14 @@ The way the code is written, there is a way that an occupant can escape.  Find t
 
 ## Design patterns exercise
 
-The Village builds a telephone exchange. You have been asked to restructure the program using a Mediator pattern so that villagers can text important messages to each other through the exchange, rather than have to find each other at all. Draw a class diagram of your revised design, but don’t write the code yet.(Omit the fields, methods, etc for classes that haven’t changed)
-## Restructuring ExerciseModify the code to implement the Mediator pattern design from theprevious exercise.
-
+The Village builds a telephone exchange. You have been asked to restructure the program using a Mediator pattern so that villagers can text important messages to each other through the exchange, rather than have to find each other at all. Draw a class diagram of your revised design, but don’t write the code yet.
+
+(Omit the fields, methods, etc for classes that haven’t changed)
+
+
+## Restructuring Exercise
+
+Modify the code to implement the Mediator pattern design from the
+previous exercise.
+
+
