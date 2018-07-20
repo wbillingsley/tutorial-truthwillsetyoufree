@@ -12,14 +12,7 @@ Hopefully, this will give you a little experience modelling and redesigning an u
 
 ## Try the code
 
-Read and run the tests. The tests contain the story for today. But don't worry too much about understanding the code yet.
-
-
-## Class diagram exercise
-
-Sketch out a class diagrm of the code.  Show how `Village`, `Person`, `NumberSix`, `NumberOne`, `Warden`, and `Notepad` relate to each other.
-
-Include methods, visibility, annotations, and parameter types (but don't include getters and setters).
+Read and run the tests. The tests contain the story for today, so open up TestVillage in the `com.wbillingsley.tutorials.classdiags.village` package in your IDE.
 
 
 ## The story
@@ -40,7 +33,18 @@ The Village builds a telephone exchange. You have been asked to restructure the 
 (Omit the fields, methods, etc for classes that haven’t changed)
 
 
-## Restructuring Exercise
+## UML Exercises
+
+These are for if you've been introduced to UML diagrams (a little later in the course)
+
+### Class diagram exercise
+
+Sketch out a class diagram of the code.  Show how `Village`, `Person`, `NumberSix`, `NumberOne`, `Warden`, and `Notepad` relate to each other.
+
+Include methods, visibility, annotations, and parameter types (but don't include getters and setters).
+
+
+### Restructuring Exercise
 
 Modify the code to implement the Mediator pattern design from the
 previous exercise.
