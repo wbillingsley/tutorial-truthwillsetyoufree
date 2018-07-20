@@ -2,6 +2,7 @@ package com.wbillingsley.tutorials.classdiags.village;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 
 import org.junit.*;
 import org.mockito.Mockito;
@@ -116,6 +117,8 @@ public class TestVillage {
 	}
 
 	/**
+	 * Our next test
+	 *
 	 * Test that sharing notepads would help us spot someone lying about their number to two
 	 * different people.
 	 */
@@ -123,10 +126,21 @@ public class TestVillage {
 	public void testSharingNotepad() {
 		Notepad n1 = new Notepad();
 		Notepad n2 = new Notepad();
+
+		// We'll introduce Mockito in a later week. For now, this line create "a mock person". A pretend person that
+		// meets the same class definition as Person (has all the same methods available) but none of the behaviour
+		// (all the methods are effectively empty).
+		//
+		// It's just here so you'll have seen "Mockito.mock" before the tutorial where we introduce it properly.
+		// In this test, we could have just done new Person()
 		Person p = Mockito.mock(Person.class);
-		
+
+		// Let's add the same (mock) person to two notebooks, but with different numbers
 		n1.addPerson(6, p);
 		n2.addPerson(5, p);
+
+		// Then let's copy everything from notebook 2 into notebook 1. This should cause the LiarException to be
+		// thrown, that the test is looking for.
 		n1.addAll(n2);
 	}	
 	
@@ -155,8 +169,13 @@ public class TestVillage {
 			p.find(6);
 		}
 		
-		// Now surely if Drake collects the villagers' notepads, he'll find one liar in their notes...		
+		// Now surely if Drake collects the villagers' notepads, he'll find one liar in their notes...
+
+		// Let's keep a record of all the liars we find when copying the notepads. As the LiarException contains
+		// the numbers they used, let's keep this as a map from person to LiarException
 		HashMap<Person, LiarException> liars = new HashMap<Person, LiarException>();
+
+		// Now let's copy all of the notepads into John Drake's notepad, and also remember the last lie we saw
 		LiarException lastLie = null;
 		for (Person p : Village.INSTANCE.getOccupants()) {
 			try {
@@ -167,10 +186,17 @@ public class TestVillage {
 					lastLie = ex;
 				}
 			}			
-		}			
+		}
+
+		// If our plan has worked, then in theory we have found exactly one liar (Number One)
+		// Let's confront him with the evidence, and in theory, he will throw Number Six out of the village before
+		// he can tell anyone else
 		numberOne.youAreNumberOne(lastLie.getFirst(), lastLie.getSecond(), johnDrake);
 		
 		// Check that in theory, John Drake would discover Number One and be kicked out of the Village
+		// This test does not expect an exception. Instead, it has an assert at the end. This test passes if the
+		// following assertion is true -- if we ask if the village still contains johnDrake, we should get false as
+		// the result.
 		Assert.assertEquals("The plan won't work", 
 				false,
 				Village.INSTANCE.getOccupants().contains(johnDrake)
@@ -232,6 +258,41 @@ public class TestVillage {
 				true,
 				Village.INSTANCE.getOccupants().contains(johnDrake)
 		);
+
+		// To find out why, explore the Warden.notePerson method. Uh-oh, wardens lie too. And they only lie
+		// sometimes, making it really hard to identify because sometimes they are lying and sometimes they are not.
+		// This is a subtle introduction to one of the most annoying things in debugging -- when you have a test that
+		// sometimes passes and sometimes fails, and you need to work out why.
+
+		// But for now, it's enough that it's got you to explore JUnit tests, explore existing code using your IDE
+		// and run tests in a gradle project
+	}
+
+	// To finish our story, though, let's show you the escape route John Drake never found. By default, this test
+	// is not run -- it's marked Ignore. But if you enable it, you'll see John Drake escape.
+	@Test
+	@Ignore("What a pity John Drake didn't try this")
+	public void wouldHaveWorked() {
+		// let's put the villagers and Drake in the village as before
+		for (int i = 0; i < 150; i++) {
+			Warden w = new Warden();
+			w.enterVillage();
+		}
+		for (int i = 0; i < 150; i++) {
+			Person p = new Person();
+			p.enterVillage();
+		}
+		johnDrake.enterVillage();
+		numberOne.enterVillage();
+
+		// Now let's just ask The Village for its occupants list
+		Set<Person> occupants = Village.INSTANCE.getOccupants();
+
+		// It's given us its occupants list, but it's mutable! It has remove methods on it!
+		occupants.remove(johnDrake);
+
+		// Crikey, getting out was easier than we thought
+		Assert.assertEquals(false, Village.INSTANCE.getOccupants().contains(johnDrake));
 	}
 	
 	
