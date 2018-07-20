@@ -30,14 +30,19 @@ public class Notepad {
 		// Put the person into the map from Person to number.
 		// When we call put, if there was already a value for that key (a number for that Person), it will return it
 		// (that's just how the Java library writers wrote HashMap)
-		Integer i = reverseMap.put(p, number);
+		Integer lastRecordedNumber = reverseMap.put(p, number);
 
 		// If they already had a number and it was different, they have lied!
-		if (i != null && i != number) {
-			throw new LiarException(i, number, p);
+		if (lastRecordedNumber != null && lastRecordedNumber != number) {
+			throw new LiarException(lastRecordedNumber, number, p);
 		}
 	}
-	
+
+	/**
+	 * This is a getter -- a Java convention for encapsulation. The field itself is kept private, but there is a
+	 * public get function to return it.
+	 * @return
+	 */
 	public HashMap<Integer, Person> getForwardMap() {
 		return forwardMap;
 	}
